@@ -6,5 +6,5 @@ steps:
   # deploy
   - name: 'gcr.io/protokit-238521/deployer:latest'
     entrypoint: '/bin/bash'
-    args: ['kubectl', 'apply', '-k', '${BRANCH_NAME}']
+    args: ['./kustomize-wrapper.sh', 'kubectl', 'apply', '-k', '${BRANCH_NAME}']
     env: ['KUBECONFIG=/workspace/.kubeconfig']
