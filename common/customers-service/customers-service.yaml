@@ -1,0 +1,85 @@
+# Copyright 2018 Google Inc.
+#
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     https://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/component: customers-service
+    app.kubernetes.io/instance: spring-customers-service
+  name: customers-service
+spec:
+  replicas: 2
+  minReadySeconds: 10
+  strategy:
+    rollingUpdate:
+      maxUnavailable: 0
+      maxSurge: 100%
+  selector:
+    matchLabels:
+      app.kubernetes.io/component: customers-service
+      app.kubernetes.io/instance: spring-customers-service
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/component: customers-service
+        app.kubernetes.io/instance: spring-customers-service
+    spec:
+      containers:
+      - command:
+        - ./dockerize
+        - -wait=tcp://$(DISCOVERY_SERVER_NAME):8761
+        - -timeout=60s
+        - --
+        - java
+        - -jar
+        - /app.jar
+        - --eureka.client.serviceUrl.defaultZone=http://$(DISCOVERY_SERVER_NAME):8761/eureka/
+        - --eureka.environment=prod
+        - --eureka.instance.leaseExpirationDurationInSeconds=$(LEASE_EXPIRATION_DURATION_SECONDS)
+        - --eureka.instance.leaseRenewalIntervalInSeconds=$(LEASE_RENEWAL_INTERVAL_SECONDS)
+        - --eureka.instance.hostname=$(CUSTOMERS_SERVICE_NAME)
+        - --eureka.instance.registryFetchIntervalSeconds=$(REGISTRY_FETCH_INTERVAL_SECONDS)
+        - --spring.cloud.config.uri=http://$(CONFIG_SERVER_NAME):8888
+        - --spring.datasource.platform=$(SPRING_DATASOURCE_PLATFORM)
+        - --spring.datasource.url=$(SPRING_DATASOURCE_URL)
+        envFrom:
+          - configMapRef:
+              name: spring-cloud-config
+          - secretRef:
+              name: spring-cloud-secret
+        env:
+          - name: JAVA_OPTS
+            value: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Djava.security.egd=file:/dev/./urandom
+        image: customers-service
+        name: customers-service
+        ports:
+        - containerPort: 8081
+        resources:
+          limits:
+            memory: "536870912"
+      restartPolicy: Always
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    io.kompose.service: customers-service
+  name: customers-service
+spec:
+  ports:
+    - name: "8081"
+      port: 8081
+      targetPort: 8081
+  selector:
+    io.kompose.service: customers-service
