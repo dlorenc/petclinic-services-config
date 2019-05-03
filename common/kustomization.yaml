@@ -40,8 +40,8 @@ images:
     newTag: release-0.1.1
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-config-server
   - name: customers-service
-    newTag: v0.17
-    newName: gcr.io/protokit-238521/spring-petclinic-customers-service
+    newTag: release-0.1.1
+    newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-customers-service
   - name: spring-cloud-netflix-discovery-server-image
     newTag: release-0.1.1
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-discovery-server
