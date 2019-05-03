@@ -1,0 +1,5 @@
+steps:
+  - name: 'gcr.io/protokit-238521/deployer:latest'
+    entrypoint: '/bin/bash'
+    args: ['./deploy.sh']
+    env: ['KUBECONFIG=/workspace/.kubeconfig']
