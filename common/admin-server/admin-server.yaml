@@ -19,7 +19,7 @@ metadata:
     app.kubernetes.io/instance: spring-admin-service
   name: admin-server
 spec:
-  replicas: 2
+  replicas: 1
   minReadySeconds: 10
   strategy:
     rollingUpdate:
@@ -68,13 +68,21 @@ spec:
         resources:
           limits:
             memory: "536870912"
+        readinessProbe:
+          httpGet:
+            path: '/actuator/health'
+            port: 9090
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 5
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    io.kompose.service: admin-server
+    app.kubernetes.io/component: admin-service
+    app.kubernetes.io/instance: spring-admin-service
   name: admin-server
 spec:
   ports:
@@ -82,4 +90,5 @@ spec:
       port: 9090
       targetPort: 9090
   selector:
-    io.kompose.service: admin-server
+    app.kubernetes.io/component: admin-service
+    app.kubernetes.io/instance: spring-admin-service

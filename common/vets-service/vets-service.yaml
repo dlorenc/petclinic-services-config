@@ -19,7 +19,7 @@ metadata:
     app.kubernetes.io/instance: spring-vets-service
   name: vets-service
 spec:
-  replicas: 2
+  replicas: 1
   minReadySeconds: 10
   strategy:
     rollingUpdate:
@@ -68,13 +68,21 @@ spec:
         resources:
           limits:
             memory: "536870912"
+        readinessProbe:
+          httpGet:
+            path: '/actuator/health'
+            port: 8083
+          initialDelaySeconds: 5
+          timeoutSeconds: 1
+          periodSeconds: 5
       restartPolicy: Always
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    io.kompose.service: vets-service
+    app.kubernetes.io/component: vets-service
+    app.kubernetes.io/instance: spring-vets-service
   name: vets-service
 spec:
   ports:
@@ -82,5 +90,6 @@ spec:
       port: 8083
       targetPort: 8083
   selector:
-    io.kompose.service: vets-service
+    app.kubernetes.io/component: vets-service
+    app.kubernetes.io/instance: spring-vets-service
 
