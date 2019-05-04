@@ -42,7 +42,7 @@ images:
   - name: customers-service
     newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-customers-service
-  - name: spring-cloud-netflix-discovery- server-image
+  - name: spring-cloud-netflix-discovery-server-image
     newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-discovery-server
   - name: spring-cloud-netflix-hystrix-dashboard-image
