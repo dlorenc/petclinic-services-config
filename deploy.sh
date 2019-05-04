@@ -1,6 +1,6 @@
 #!/bin/bash
 set -e
 
-gcloud container clusters get-credentials petclinic-us-east1 --zone us-east1-d
-
-kubectl apply -k deploy-prod/
+source deploy.env
+gcloud container clusters get-credentials ${DEPLOY_CLUSTER} --zone ${DEPLOY_ZONE}
+kubectl apply -k ${DEPLOY_DIR}

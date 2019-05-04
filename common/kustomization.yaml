@@ -18,7 +18,7 @@ commonLabels:
   app.kubernetes.io/name: petclinic
 
 commonAnnotations:
-  app.kubernetes.io/version: release-0.1.1
+  app.kubernetes.io/version: release-0.1.3
 
 bases:
   - https://github.com/kitops/spring-cloud-config-platform/spring-cloud-netflix?ref=v1.0
@@ -31,34 +31,34 @@ resources:
 
 images:
   - name: admin-server
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-admin-server
   - name: spring-cloud-netflix-api-gateway-image
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-api-gateway
   - name: spring-cloud-netflix-config-server-image
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-config-server
   - name: customers-service
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-customers-service
   - name: spring-cloud-netflix-discovery-server-image
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-discovery-server
   - name: spring-cloud-netflix-hystrix-dashboard-image
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-hystrix-dashboard
   - name: vets-service
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-vets-service
   - name: visits-service
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/petclinic-app/spring-petclinic-visits-service
   - name: grafana-server
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/grafana
   - name: prometheus-server
-    newTag: release-0.1.1
+    newTag: release-0.1.3
     newName: gcr.io/protokit-238521/prometheus
 
 vars:
