@@ -19,7 +19,7 @@ metadata:
     app.kubernetes.io/instance: spring-admin-service
   name: admin-server
   annotations:
-    springcloud.kitops.dev/wire: service
+    springcloud.kitops.dev/auto-wire: true
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -87,7 +87,7 @@ metadata:
     app.kubernetes.io/instance: spring-admin-service
   name: admin-server
   annotations:
-    springcloud.kitops.dev/wire: service
+    springcloud.kitops.dev/auto-wire: true
 spec:
   ports:
     - name: "9090"
