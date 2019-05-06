@@ -1,4 +1,4 @@
-# Copyright 2018 Google Inc.
+# Copyright 2019 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -26,5 +26,10 @@ spec:
   template:
     spec:
       containers:
-        - name: spring-cloud-service
-          image: spring-petclinic-admin-service
+      - name: spring-cloud-service
+        image: spring-petclinic-admin-server
+        envFrom:
+        - configMapRef:
+            name: spring-cloud-config
+        - secretRef:
+            name: spring-cloud-secret

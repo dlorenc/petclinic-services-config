@@ -28,3 +28,8 @@ spec:
       containers:
       - name: spring-cloud-service
         image: spring-petclinic-visits-service
+        envFrom:
+        - configMapRef:
+            name: spring-cloud-config
+        - secretRef:
+            name: spring-cloud-secret

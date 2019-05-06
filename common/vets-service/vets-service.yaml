@@ -26,5 +26,10 @@ spec:
   template:
     spec:
       containers:
-        - name: spring-cloud-service
-          image: spring-petclinic-vets-service
+      - name: spring-cloud-service
+        image: spring-petclinic-vets-service
+        envFrom:
+        - configMapRef:
+            name: spring-cloud-config
+        - secretRef:
+            name: spring-cloud-secret
