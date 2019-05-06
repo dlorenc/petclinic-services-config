@@ -18,6 +18,8 @@ metadata:
     app.kubernetes.io/component: vets-service
     app.kubernetes.io/instance: spring-vets-service
   name: vets-service
+  annotations:
+    springcloud.kitops.dev/wire: service
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -84,6 +86,8 @@ metadata:
     app.kubernetes.io/component: vets-service
     app.kubernetes.io/instance: spring-vets-service
   name: vets-service
+  annotations:
+    springcloud.kitops.dev/wire: service
 spec:
   ports:
     - name: "8083"

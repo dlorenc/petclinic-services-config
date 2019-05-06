@@ -18,6 +18,8 @@ metadata:
     app.kubernetes.io/component: visits-service
     app.kubernetes.io/instance: spring-visits-service
   name: visits-service
+  annotations:
+    springcloud.kitops.dev/wire: service
 spec:
   replicas: 1
   minReadySeconds: 10
@@ -83,6 +85,8 @@ metadata:
   labels:
     app.kubernetes.io/component: visits-service
     app.kubernetes.io/instance: spring-visits-service
+  annotations:
+    springcloud.kitops.dev/wire: service
   name: visits-service
 spec:
   ports:
