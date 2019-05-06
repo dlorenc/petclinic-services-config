@@ -19,9 +19,6 @@ namespace: petclinic-app-staging
 commonLabels:
   app.kubernetes.io/environment: staging
 
-commonAnnotations:
-  'app.kubernetes.io/version': 'release-0.1'
-
 configMapGenerator:
   - name: spring-cloud-config
     env: spring-cloud-config.env
