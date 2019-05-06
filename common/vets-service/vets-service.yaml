@@ -14,82 +14,22 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app.kubernetes.io/component: vets-service
-    app.kubernetes.io/instance: spring-vets-service
   name: vets-service
+  annotations:
+    springcloud.kitops.dev/auto-wire: "true"
+    springcloud.kitops.dev/auto-generate: "true"
 spec:
-  replicas: 1
-  minReadySeconds: 10
-  strategy:
-    rollingUpdate:
-      maxUnavailable: 0
-      maxSurge: 100%
   selector:
     matchLabels:
       app.kubernetes.io/component: vets-service
-      app.kubernetes.io/instance: spring-vets-service
+      app.kubernetes.io/instance: spring-cloud-vets-service
   template:
-    metadata:
-      labels:
-        app.kubernetes.io/component: vets-service
-        app.kubernetes.io/instance: spring-vets-service
     spec:
       containers:
-      - command:
-        - ./dockerize
-        - -wait=tcp://$(DISCOVERY_SERVER_NAME):8761
-        - -timeout=60s
-        - --
-        - java
-        - -jar
-        - /app.jar
-        - --eureka.client.serviceUrl.defaultZone=http://$(DISCOVERY_SERVER_NAME):8761/eureka/
-        - --eureka.environment=prod
-        - --eureka.instance.leaseExpirationDurationInSeconds=$(LEASE_EXPIRATION_DURATION_SECONDS)
-        - --eureka.instance.leaseRenewalIntervalInSeconds=$(LEASE_RENEWAL_INTERVAL_SECONDS)
-        - --eureka.instance.hostname=$(VETS_SERVICE_NAME)
-        - --eureka.instance.registryFetchIntervalSeconds=$(REGISTRY_FETCH_INTERVAL_SECONDS)
-        - --spring.cloud.config.uri=http://$(CONFIG_SERVER_NAME):8888
-        - --spring.datasource.platform=$(SPRING_DATASOURCE_PLATFORM)
-        - --spring.datasource.url=$(SPRING_DATASOURCE_URL)
+      - name: spring-cloud-service
+        image: spring-petclinic-vets-service
         envFrom:
-          - configMapRef:
-              name: spring-cloud-config
-          - secretRef:
-              name: spring-cloud-secret
-        env:
-          - name: JAVA_OPTS
-            value: -XX:+UnlockExperimentalVMOptions -XX:+UseCGroupMemoryLimitForHeap -Djava.security.egd=file:/dev/./urandom
-        image: vets-service
-        name: vets-service
-        ports:
-        - containerPort: 8083
-        resources:
-          limits:
-            memory: "536870912"
-        readinessProbe:
-          httpGet:
-            path: '/actuator/health'
-            port: 8083
-          initialDelaySeconds: 5
-          timeoutSeconds: 1
-          periodSeconds: 5
-      restartPolicy: Always
----
-apiVersion: v1
-kind: Service
-metadata:
-  labels:
-    app.kubernetes.io/component: vets-service
-    app.kubernetes.io/instance: spring-vets-service
-  name: vets-service
-spec:
-  ports:
-    - name: "8083"
-      port: 8083
-      targetPort: 8083
-  selector:
-    app.kubernetes.io/component: vets-service
-    app.kubernetes.io/instance: spring-vets-service
-
+        - configMapRef:
+            name: spring-cloud-config
+        - secretRef:
+            name: spring-cloud-secret
