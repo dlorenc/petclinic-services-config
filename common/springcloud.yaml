@@ -11,20 +11,14 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
-apiVersion: apps/v1
-kind: Deployment
+apiVersion: springcloud.kitops.dev/v1beta1
+kind: SpringCloudPlatform
 metadata:
-  name: admin-service
-  annotations:
-    springcloud.kitops.dev/auto-wire: "true"
-    springcloud.kitops.dev/auto-generate: "true"
-spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/component: admin-service
-      app.kubernetes.io/instance: spring-cloud-admin-service
-  template:
-    spec:
-      containers:
-        - name: spring-cloud-service
-          image: spring-petclinic-admin-service
+  name: visits-service
+transform:
+  leaseExpirationDurationSeconds: 5
+  leaseRenewalIntervalSeconds: 1
+  registeryFetchIntervalSeconds: 5
+  image:
+    repo: "gcr.io/protokit-238521/petclinic-app"
+    tag: "release-0.1.8"
