@@ -18,7 +18,7 @@ commonLabels:
   app.kubernetes.io/name: petclinic
 
 commonAnnotations:
-  app.kubernetes.io/version: release-0.1.8
+  app.kubernetes.io/version: release-0.1.14
 
 bases:
   - https://github.com/kitops/spring-cloud-config-platform/spring-cloud-netflix?ref=v1.0
