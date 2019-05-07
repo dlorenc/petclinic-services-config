@@ -14,7 +14,7 @@
 apiVersion: springcloud.kitops.dev/v1beta1
 kind: SpringCloudPlatform
 metadata:
-  name: visits-service
+  name: meta
 transform:
   leaseExpirationDurationSeconds: 5
   leaseRenewalIntervalSeconds: 1

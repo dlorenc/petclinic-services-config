@@ -28,4 +28,3 @@ resources:
   - customers-service/customers-service.yaml
   - vets-service/vets-service.yaml
   - visits-service/visits-service.yaml
-

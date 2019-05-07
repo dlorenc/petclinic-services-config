@@ -19,17 +19,8 @@ metadata:
     springcloud.kitops.dev/auto-wire: "true"
     springcloud.kitops.dev/auto-generate: "true"
 spec:
-  selector:
-    matchLabels:
-      app.kubernetes.io/component: visits-service
-      app.kubernetes.io/instance: spring-cloud-visits-service
   template:
     spec:
       containers:
       - name: spring-cloud-service
         image: spring-petclinic-visits-service
-        envFrom:
-        - configMapRef:
-            name: spring-cloud-config
-        - secretRef:
-            name: spring-cloud-secret
