@@ -16,7 +16,7 @@ kind: Deployment
 metadata:
   name: admin-service
   annotations:
-    springcloud.kitops.dev/auto-wire: "true"
+    springcloud.kitops.dev/auto-wire: ""
 spec:
   template:
     spec:
@@ -28,4 +28,4 @@ kind: Service
 metadata:
   name: admin-service
   annotations:
-    springcloud.kitops.dev/auto-wire: "true"
+    springcloud.kitops.dev/auto-wire: ""
