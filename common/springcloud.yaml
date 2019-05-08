@@ -12,7 +12,7 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 apiVersion: springcloud.kitops.dev/v1beta1
-kind: SpringCloudPlatformDebug
+kind: SpringCloudPlatform
 metadata:
   name: meta
 transform:
