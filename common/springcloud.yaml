@@ -16,9 +16,11 @@ kind: SpringCloudPlatform
 metadata:
   name: meta
 transform:
-  leaseExpirationDurationSeconds: 5
-  leaseRenewalIntervalSeconds: 1
-  registeryFetchIntervalSeconds: 5
-  image:
-    repo: "gcr.io/protokit-238521/petclinic-app"
-    tag: "release-0.1.8"
+  discovery:
+    leaseExpirationDurationSeconds: 5
+    leaseRenewalIntervalSeconds: 1
+    registeryFetchIntervalSeconds: 5
+  container:
+    image:
+      repo: gcr.io/protokit-238521/petclinic-app
+      tag: release-1.0.12
