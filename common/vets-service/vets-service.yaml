@@ -17,10 +17,15 @@ metadata:
   name: vets-service
   annotations:
     springcloud.kitops.dev/auto-wire: "true"
-    springcloud.kitops.dev/auto-generate: "true"
 spec:
   template:
     spec:
       containers:
-      - name: spring-cloud-service
-        image: spring-petclinic-vets-service
+      - image: spring-petclinic-vets-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: vets-service
+  annotations:
+    springcloud.kitops.dev/auto-wire: "true"

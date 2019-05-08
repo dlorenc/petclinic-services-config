@@ -14,18 +14,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: customers-service
+  name: api-gateway
   annotations:
     springcloud.kitops.dev/auto-wire: "true"
 spec:
   template:
     spec:
       containers:
-      - image: spring-petclinic-customers-service
+      - image: spring-cloud-netflix-api-gateway-image
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: customers-service
+  name: api-gateway
   annotations:
     springcloud.kitops.dev/auto-wire: "true"
