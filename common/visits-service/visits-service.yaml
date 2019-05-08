@@ -16,11 +16,16 @@ kind: Deployment
 metadata:
   name: visits-service
   annotations:
-    springcloud.kitops.dev/auto-wire: "true"
-    springcloud.kitops.dev/auto-generate: "true"
+    springcloud.kitops.dev/auto-wire: ""
 spec:
   template:
     spec:
       containers:
-      - name: spring-cloud-service
-        image: spring-petclinic-visits-service
+      - image: spring-petclinic-visits-service
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: visits-service
+  annotations:
+    springcloud.kitops.dev/auto-wire: ""

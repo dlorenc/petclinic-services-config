@@ -1,4 +1,4 @@
-# Copyright 2019 Google Inc.
+# Copyright 2018 Google Inc.
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -14,18 +14,18 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: admin-service
+  name: api-gateway
   annotations:
     springcloud.kitops.dev/auto-wire: ""
 spec:
   template:
     spec:
       containers:
-      - image: spring-petclinic-admin-server
+      - image: spring-petclinic-api-gateway
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: admin-service
+  name: api-gateway
   annotations:
     springcloud.kitops.dev/auto-wire: ""

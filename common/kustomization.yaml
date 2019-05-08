@@ -17,14 +17,13 @@ kind: Kustomization
 commonLabels:
   app.kubernetes.io/name: petclinic
 
-commonAnnotations:
-  app.kubernetes.io/version: release-0.1.14
+transformers: ['springcloud.yaml']
 
-bases:
-  - https://github.com/kitops/spring-cloud-config-platform/spring-cloud-netflix?ref=v1.0
+bases: ['https://github.com/kitops/spring-cloud-config-platform/spring-cloud-netflix?ref=v1.0']
 
 resources:
-  - admin-server/admin-server.yaml
-  - customers-service/customers-service.yaml
-  - vets-service/vets-service.yaml
-  - visits-service/visits-service.yaml
+- admin-server/admin-server.yaml
+- api-gateway/api-gateway.yaml
+- customers-service/customers-service.yaml
+- vets-service/vets-service.yaml
+- visits-service/visits-service.yaml
