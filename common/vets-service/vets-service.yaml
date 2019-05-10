@@ -17,6 +17,7 @@ metadata:
   name: vets-service
   annotations:
     springcloud.kitops.dev/auto-wire: ""
+    anthos.kitops.dev/sql: ""
 spec:
   template:
     spec:

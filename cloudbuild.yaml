@@ -1,4 +1,14 @@
 steps:
-  - name: 'gcr.io/protokit-238521/deploy:v0.12'
-    entrypoint: './deploy.sh'
+  - name: 'gcr.io/protokit-238521/deploy:v0.13'
+    entrypoint: 'sh'
+    args:
+    - '-c'
+    - |
+      set -e
+
+      export KUBECONFIG=/workspace/.kubeconfig
+      gcloud container clusters get-credentials ${DEPLOY_CLUSTER} --zone ${DEPLOY_ZONE}
+
+      source deploy.env
+      kustomize build --enable_alpha_goplugins_accept_panic_risk ${DEPLOY_DIR} | kubectl apply -f -
     env: ['KUBECONFIG=/workspace/.kubeconfig']

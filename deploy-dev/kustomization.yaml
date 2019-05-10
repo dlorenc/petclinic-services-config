@@ -19,6 +19,9 @@ namespace: petclinic-app-dev
 commonLabels:
   app.kubernetes.io/environment: dev
 
+commonAnnotations:
+  springcloud.kitops.dev/db: memory
+
 configMapGenerator:
   - name: spring-cloud-config
     env: spring-cloud-config.env

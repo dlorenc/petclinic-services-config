@@ -19,6 +19,9 @@ namespace: petclinic-app-prod
 commonLabels:
   app.kubernetes.io/environment: prod
 
+commonAnnotations:
+  springcloud.kitops.dev/db: cloud-sql
+
 configMapGenerator:
 - name: spring-cloud-config
   behavior: merge
