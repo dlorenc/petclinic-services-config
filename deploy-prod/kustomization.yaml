@@ -20,12 +20,22 @@ commonLabels:
   app.kubernetes.io/environment: prod
 
 configMapGenerator:
-  - name: spring-cloud-config
-    env: spring-cloud-config.env
-    behavior: merge
+- name: spring-cloud-config
+  behavior: merge
+  env: spring-cloud-config.env
 
-bases:
-  - ../common
+secretGenerator:
+- name: spring-cloud-secret
+  behavior: merge
+  files:
+  - "secrets/SPRING_DATASOURCE_PASSWORD"
+  - "secrets/SPRING_DATASOURCE_USER"
+- name: cloudsql-instance-credentials
+  files:
+  - "secrets/credentials.json"
 
-resources:
-  - namespace.yaml
+bases: [ "../common" ]
+
+resources: [ "namespace.yaml" ]
+
+transformers: [ "anthos.yaml" ]
